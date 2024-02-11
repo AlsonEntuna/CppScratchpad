@@ -1,6 +1,7 @@
 #include <iostream>
 #include <memory>
 #include <string>
+#include <vector>
 
 class MyClass
 {
@@ -40,6 +41,14 @@ std::shared_ptr<MyClass> GetOrCreateCacheObject(const char* name)
     return newPtr;
 }
 
+void memoryDump()
+{
+    int test = 0x01234567;
+    std::cout << "Memory Address of test: " << &test << std::endl;
+    for (int i = 0; i < sizeof(test); ++i)
+        printf(" [%.2x]", reinterpret_cast<char*>(&test)[i]);
+}
+
 int main()
 {
     std::shared_ptr<MyClass> ptr1 = std::make_shared<MyClass>("John");
@@ -65,6 +74,8 @@ int main()
     cachedPtr2->SetName("Entuna");
     std::cout << "after setting of value from cachedPtr2: " << cachedPtr1->GetName() << std::endl;
 
+    std::cout << "memory dump---" << std::endl;
+    memoryDump();
 
     std::cin.get();
     return 0;
