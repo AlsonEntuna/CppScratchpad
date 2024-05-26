@@ -49,8 +49,21 @@ void memoryDump()
         printf(" [%.2x]", reinterpret_cast<char*>(&test)[i]);
 }
 
+void BitMasking(const uint32_t&& rgbValue)
+{
+    const int aValue = (rgbValue >> 24) & 0xFF;
+    const int rValue = (rgbValue >> 16) & 0xFF;
+    const int gValue = (rgbValue >> 8) & 0xFF;
+    const int bValue = rgbValue & 0xFF;
+    printf("A: %i \n", aValue);
+    printf("R: %i \n", rValue);
+    printf("G: %i \n", gValue);
+    printf("B: %i \n", bValue);
+}
+
 int main()
 {
+    BitMasking(0x3A862E);
     std::shared_ptr<MyClass> ptr1 = std::make_shared<MyClass>("John");
     std::cout << "Name of ptr1: " << ptr1->GetName() << std::endl;
 
